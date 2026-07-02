@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 
-const pages = import.meta.glob('./pages/**/*.jsx', { eager: true }) as Record<
+// Global pages (component gallery, etc.)
+const globalPages = import.meta.glob('./pages/**/*.jsx', { eager: true }) as Record<
   string,
   { default: React.ComponentType }
 >;
 
-function getPageName(path: string) {
-  return path.replace('./pages/', '').replace('.jsx', '');
-}
+// Prototype pages: prototypes/{slug}/pages/{page}.jsx → route /{slug}/{page}
+const prototypePages = import.meta.glob('../prototypes/*/pages/**/*.jsx', {
+  eager: true,
+}) as Record<string, { default: React.ComponentType }>;
 
-const pageEntries = Object.entries(pages).map(([path, mod]) => ({
-  name: getPageName(path),
-  Component: mod.default,
-}));
+const pageEntries = [
+  ...Object.entries(globalPages).map(([path, mod]) => ({
+    name: path.replace('./pages/', '').replace('.jsx', ''),
+    Component: mod.default,
+  })),
+  ...Object.entries(prototypePages).map(([path, mod]) => ({
+    name: path.replace('../prototypes/', '').replace('/pages/', '/').replace('.jsx', ''),
+    Component: mod.default,
+  })),
+];
 
 function groupByFolder(entries: typeof pageEntries) {
   const groups: Record<string, typeof pageEntries> = {};

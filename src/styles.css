@@ -13,7 +13,9 @@
   --color-text-strong: #1A1A1A;
   --color-text-body: #3A3A3A;
   --color-text-secondary: #6A6A6A;
-  --color-text-tertiary: #9A9A9A;
+  /* Tertiary is an alias of secondary: metadata is differentiated by SIZE (12px),
+     never by a lighter gray. v1's #9A9A9A failed WCAG AA (2.8:1). */
+  --color-text-tertiary: #6A6A6A;
 
   /* Interactive */
   --color-accent: #0667D9;
@@ -25,6 +27,7 @@
   --color-success: #2D6A4F;
   --color-success-light: #E8F5EE;
   --color-warning: #B7791F;
+  --color-warning-strong: #8A5A12; /* AA-passing warning for text <18px; #B7791F fails at 3.3-3.6:1 */
   --color-warning-light: #FEF3C7;
   --color-error: #C0392B;
   --color-error-light: #FAEAE8;
@@ -83,6 +86,7 @@
   --color-success: var(--color-success);
   --color-success-light: var(--color-success-light);
   --color-warning: var(--color-warning);
+  --color-warning-strong: var(--color-warning-strong);
   --color-warning-light: var(--color-warning-light);
   --color-error: var(--color-error);
   --color-error-light: var(--color-error-light);
