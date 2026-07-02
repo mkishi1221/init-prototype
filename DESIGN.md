@@ -214,6 +214,7 @@ Every screen and component must have a clear reading order. Before writing JSX, 
 - Use the 3px left-bar pattern for active nav items (no background fill)
 
 **Don't:**
+- Import brand icons (`Linkedin`, `Github`, `Twitter`, ...) from `lucide-react` — they don't exist and break the build; use a generic icon (`ExternalLink`, `Link`, `Share2`) with a visible text label instead
 - Use any color outside the token set, or pure black text
 - Use font weight below 400
 - Use `text-text-secondary` for body prose (that's what `text-text-body` is for)
